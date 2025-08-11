@@ -1,0 +1,32 @@
+---
+layout: default
+---
+
+<article class="post">
+  <h1 class="post-title">{{ page.title }}</h1>
+  <div class="post-meta">
+    <time datetime="{{ page.date | date_to_xmlschema }}">
+      {{ page.date | date: "%Y-%m-%d" }}
+    </time>
+    {% if page.author %}
+      • {{ page.author }}
+    {% endif %}
+  </div>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <div class="post-navigation">
+    <div class="prev">
+      {% if page.previous.url %}
+      <a href="{{ page.previous.url | relative_url }}">&laquo; {{ page.previous.title }}</a>
+      {% endif %}
+    </div>
+    <div class="next">
+      {% if page.next.url %}
+      <a href="{{ page.next.url | relative_url }}">{{ page.next.title }} &raquo;</a>
+      {% endif %}
+    </div>
+  </div>
+</article>

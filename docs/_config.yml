@@ -1,0 +1,51 @@
+title: 世上无难事只要肯放弃
+description: 更新每日难事
+author: SevenSwordsAlliance
+
+# GitHub Pages 配置
+baseurl: ""
+url: "https://SevenSwordsAlliance.github.io"
+
+# 博客设置
+permalink: /posts/:title/
+
+# 主题设置
+# 使用极简主题或自定义主题
+# theme: minima  # 注释掉主题以避免冲突
+
+# 排除不处理的文件
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+
+# 文章默认布局
+defaults:
+  -
+    scope:
+      path: ""  # 指定应用此默认值的文件
+      type: "posts"  # 指定应用默认值的文件类型
+    values:
+      layout: "post"  # 默认布局为 post
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
+# 启用插件
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# 设置时区
+timezone: Asia/Shanghai
+
+# 生成目录
+collections:
+  posts:
+    output: true
+    # 修改permalink设置，移除日期相关部分
+    permalink: /:title/
+
