@@ -20,6 +20,10 @@ body {
   background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
   margin: 0;
   padding: 0;
+  font-size: 16px;
+}
+
+.wrapper {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -36,14 +40,13 @@ body {
 .site-header {
   background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   padding: 20px 0;
-  margin-bottom: 40px;
   box-shadow: var(--shadow);
-  position: sticky;
-  top: 0;
-  z-index: 100;
 }
 
-.site-header .container {
+.header-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -74,6 +77,7 @@ body {
   transition: var(--transition);
   position: relative;
   overflow: hidden;
+  touch-action: manipulation;
 }
 
 .site-nav a:hover {
@@ -155,6 +159,7 @@ body {
   display: block;
   margin-bottom: 15px;
   transition: var(--transition);
+  touch-action: manipulation;
 }
 
 .post-link:hover {
@@ -251,6 +256,7 @@ body {
   box-shadow: var(--shadow);
   transition: var(--transition);
   font-weight: 500;
+  touch-action: manipulation;
 }
 
 .post-navigation a:hover {
@@ -269,6 +275,12 @@ body {
   text-align: center;
   box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
+}
+
+.footer-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .site-footer p {
@@ -308,11 +320,185 @@ body {
   }
 }
 
+/* 可访问性优化 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .site-title a,
+  .site-nav a,
+  .post-link,
+  .post-navigation a {
+    transition: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  :root {
+    --text-color: #000;
+    --text-light: #222;
+    --light-color: #fff;
+    --border-color: #000;
+  }
+
+  .site-header {
+    background: #000;
+  }
+
+  .site-title a {
+    color: #fff;
+  }
+
+  .site-nav a {
+    color: #ddd;
+  }
+
+  .site-nav a:hover {
+    background: #333;
+  }
+
+  .site-footer {
+    background: #000;
+  }
+
+  .site-footer a {
+    color: #fff;
+  }
+
+  .post {
+    background: #fff;
+  }
+
+  .post-list li {
+    background: #fff;
+    border-left-color: #000;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .site-header,
+  .site-nav,
+  .site-footer {
+    display: none;
+  }
+
+  .wrapper {
+    min-height: unset;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .post {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+
+  .post-title {
+    color: #000;
+    background: none;
+    -webkit-text-fill-color: #000;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+}
+
 /* 响应式设计 */
-@media (max-width: 768px) {
-  .site-header .container {
+/* 超大屏幕 */
+@media (min-width: 1200px) {
+  body {
+    font-size: 18px;
+  }
+
+  .container,
+  .header-container,
+  .footer-container {
+    max-width: 1100px;
+  }
+
+  .post {
+    padding: 50px;
+  }
+
+  .post-list li {
+    padding: 40px;
+  }
+
+  .home-hero {
+    padding: 60px 20px;
+  }
+}
+
+/* 大屏幕 */
+@media (min-width: 992px) and (max-width: 1199px) {
+  body {
+    font-size: 17px;
+  }
+
+  .container,
+  .header-container,
+  .footer-container {
+    max-width: 960px;
+  }
+}
+
+/* 中等屏幕 */
+@media (min-width: 768px) and (max-width: 991px) {
+  body {
+    font-size: 16px;
+  }
+
+  .container,
+  .header-container,
+  .footer-container {
+    max-width: 720px;
+  }
+
+  .site-nav a {
+    margin-left: 15px;
+    font-size: 0.95rem;
+    padding: 7px 14px;
+  }
+
+  .post {
+    padding: 35px;
+  }
+
+  .post-list li {
+    padding: 25px;
+  }
+
+  .home-hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .home-hero p {
+    font-size: 1.1rem;
+  }
+}
+
+/* 小屏幕 */
+@media (max-width: 767px) {
+  body {
+    font-size: 15px;
+  }
+
+  .header-container {
     flex-direction: column;
     text-align: center;
+    padding: 0 15px;
   }
 
   .site-nav {
@@ -320,9 +506,13 @@ body {
   }
 
   .site-nav a {
-    margin: 0 10px;
+    margin: 0 8px;
     font-size: 0.9rem;
     padding: 6px 12px;
+  }
+
+  .site-title a {
+    font-size: 1.6rem;
   }
 
   .post {
@@ -348,15 +538,25 @@ body {
   .home-hero p {
     font-size: 1rem;
   }
+
+  .container,
+  .footer-container {
+    padding: 0 15px;
+  }
 }
 
+/* 超小屏幕 */
 @media (max-width: 480px) {
-  .container {
-    padding: 0 15px;
+  body {
+    font-size: 14px;
+  }
+
+  .header-container {
+    padding: 0 10px;
   }
 
   .site-title a {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .site-nav a {
@@ -375,5 +575,117 @@ body {
 
   .post-link {
     font-size: 1.2rem;
+  }
+
+  .container,
+  .footer-container {
+    padding: 0 10px;
+  }
+}
+
+/* 横屏优化 */
+@media (orientation: landscape) and (max-height: 500px) {
+  body {
+    font-size: 15px;
+  }
+
+  .site-header {
+    padding: 10px 0;
+  }
+
+  .site-title a {
+    font-size: 1.4rem;
+  }
+
+  .site-nav a {
+    padding: 4px 10px;
+    font-size: 0.85rem;
+    margin-left: 10px;
+  }
+
+  .post {
+    padding: 20px;
+  }
+
+  .home-hero {
+    padding: 30px 20px;
+  }
+}
+
+/* 竖屏优化 */
+@media (orientation: portrait) {
+  body {
+    font-size: 16px;
+  }
+
+  .site-header {
+    padding: 25px 0;
+  }
+
+  .home-hero {
+    padding: 50px 20px;
+  }
+
+  .post {
+    padding: 40px;
+  }
+}
+
+/* 高分辨率屏幕 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body {
+    font-size: 17px;
+  }
+
+  .site-header,
+  .site-footer,
+  .post,
+  .post-list li,
+  .home-hero {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+
+  .post-list li:hover,
+  .post-navigation a:hover {
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* 手机设备 */
+@media screen and (max-width: 767px) and (pointer: coarse) {
+  body {
+    font-size: 15px;
+  }
+
+  .site-nav a {
+    padding: 8px 16px;
+    font-size: 1rem;
+  }
+
+  .post-link {
+    padding: 10px 0;
+  }
+
+  .post-navigation a {
+    padding: 12px 20px;
+  }
+}
+
+/* 平板设备 */
+@media screen and (min-width: 768px) and (max-width: 1024px) and (pointer: coarse) {
+  body {
+    font-size: 16px;
+  }
+
+  .site-header {
+    padding: 22px 0;
+  }
+
+  .site-nav a {
+    padding: 10px 18px;
+  }
+
+  .home-hero {
+    padding: 45px 20px;
   }
 }
