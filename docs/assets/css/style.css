@@ -21,12 +21,15 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
   max-width: 900px;
   margin: 0 auto;
   padding: 0 20px;
+  flex: 1;
 }
 
 /* 页眉样式 */
